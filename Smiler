@@ -1,6 +1,6 @@
 ---====== Get script ======---
 
-local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/munciseek/Other-script/main/Vynixu%20entity%20spawner%20fix"))()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
 
 ---====== Create entity ======---
 
