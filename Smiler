@@ -1,0 +1,63 @@
+---====== Get script ======---
+
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/munciseek/Other-script/main/Vynixu%20entity%20spawner%20fix"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Smiler",
+    Model = "rbxassetid://16734826391", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 500,
+    MoveDelay = 12,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = true,
+    FlickerLights = { Enabled = true, Duration = 10 },
+    Cycles = { Min = 10, Max = 10, Delay = 0.5 },
+    CamShake = { Enabled = true, Values = {3.5, 20, 0.1, 1}, Range = 100 },
+    ResistCrucifix = true,
+    BreakCrucifix = false,
+    DeathMessage = {"This death message is not available"},
+    IsCuriousLight = false })
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawnedd")
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+    game.Lighting.Ambient = Color3.fromRGB(255,0,0)
+game:GetService("TweenService"):Create(game.Lighting, TweenInfo.new(1.5), {Ambient = Color3.fromRGB(255, 255, 255)}):Play()
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    print("Player Death")
+end
+
+entity.Debug.OnUseCrucifix = function()
+print("Custom crucifixion script here")
+end
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
