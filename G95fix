@@ -8,7 +8,7 @@ local g95 = Instance.new("Sound")
 	g95.PlaybackSpeed = 0.9
 	g95:Play()
 
-local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/munciseek/Other-script/main/Vynixu%20entity%20spawner%20fix"))()
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
 
 ---====== Create entity ======---
 
