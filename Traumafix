@@ -1,0 +1,77 @@
+---====== Get script ======---
+
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Trauma",
+    Model = "rbxassetid://18454029265", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 1000,
+    MoveDelay = 5,
+    HeightOffset = 1,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = { Enabled = true, Duration = 5 },
+    Cycles = { Min = 1.5, Max = 1.5, Delay = 0.1 },
+    CamShake = { Enabled = true, Values = {5.5, 20, 0.1, 1}, Range = 50 },
+    ResistCrucifix = true,
+    BreakCrucifix = false,
+    DeathMessage = {"This death message is not available"},
+    IsCuriousLight = false })
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+    game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(255, 0, 0)
+game.Lighting.MainColorCorrection.Contrast = 1
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(10),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawnedd")
+    local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "I have been found out ",
+    Desc = "",
+    Reason = "Encounter Trauma",
+    Image = "rbxassetid://0"
+})
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    print("Player Death")
+end
+
+entity.Debug.OnUseCrucifix = function()
+print("Custom crucifixion script here")
+end
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
