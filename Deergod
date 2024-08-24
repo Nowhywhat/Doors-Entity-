@@ -1,0 +1,102 @@
+---====== Get script ======---
+
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Deer god",
+    Model = "rbxassetid://12262883448", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 45,
+    MoveDelay = 0,
+    HeightOffset = 4,
+    CanKill = true,
+    KillRange = 40,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = { Enabled = true, Duration = 1 },
+    Cycles = { Min = 1, Max = 1, Delay = 1 },
+    CamShake = { Enabled = false, Values = {1.5, 20, 0.1, 1}, Range = 100 },
+    ResistCrucifix = true,
+    BreakCrucifix = false,
+    DeathMessage = {"This death message is not available"},
+    IsCuriousLight = false })
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+    local match = Instance.new("Sound")
+match.PlaybackSpeed = 1
+match.SoundId = "rbxassetid://6111244462"
+match.Volume = 1
+match.Name = "DeerGodStatic"
+match.Parent = workspace
+match:Play()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawnedd")
+    local match = Instance.new("Sound")
+match.PlaybackSpeed = 1
+match.SoundId = "rbxassetid://9043357758"
+match.Volume = 1
+match.Name = "DeerGodEscape"
+match.Parent = workspace
+match:Play()
+
+local match = Instance.new("Sound")
+match.PlaybackSpeed = 0.1
+match.SoundId = "rbxassetid://635822826"
+match.Volume = 0.8
+match.Name = "DeerGodEnd"
+match.Parent = workspace
+match:Play()
+wait()
+Deer:Stop()
+---====== Load achievement giver ======---
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+---====== Display achievement ======---
+achievementGiver({
+    Title = "Last Chance To Look Away",
+    Desc = "Why You Are Running?",
+    Reason = "Survive the rare Entity Called Deer God",
+    Image = "rbxassetid://11395249132"
+})
+game.workspace.DeerGodStatic:Stop()
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+    loadstring(game:HttpGet("https://pastefy.app/5RVoUSNE/raw"))()
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0.01 then
+        game.Players.LocalPlayer.Character.Humanoid.Health -= 0.1
+    end
+    local ReSt = game:GetService("ReplicatedStorage") 
+ ReSt.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "Deer god"
+end
+
+entity.Debug.OnDeath = function()
+    print("Player Death")
+end
+
+entity.Debug.OnUseCrucifix = function()
+print("Custom crucifixion script here")
+end
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
