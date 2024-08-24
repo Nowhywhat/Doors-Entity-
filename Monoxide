@@ -1,0 +1,78 @@
+---====== Get script ======---
+
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Nomoxide",
+    Model = "https://github.com/Johnny39871/assets/blob/main/Monoxidebutbetter.rbxm?raw=true", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 500,
+    MoveDelay = 5,
+    HeightOffset = 1,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = true,
+    FlickerLights = { Enabled = true, Duration = 5 },
+    Cycles = { Min = 5, Max = 5, Delay = 2 },
+    CamShake = { Enabled = true, Values = {9.5, 20, 0.1, 1}, Range = 100 },
+    ResistCrucifix = true,
+    BreakCrucifix = false,
+    DeathMessage = {"This death message is not available"},
+    IsCuriousLight = false })
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+    local ele = Instance.new("Sound")
+	ele.Parent = game.Workspace
+	ele.Name = "start2"
+	ele.SoundId = "rbxassetid://157325701"
+	ele.Volume = 2
+	ele.PlaybackSpeed = 0.9
+	ele:Play()
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawnedd")
+    ---====== Load achievement giver ======---
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "Electric-Shock ",
+    Desc = "Escape from electric shock ",
+    Reason = "Encounter Monoxide",
+    Image = "rbxassetid://10888024922"
+})
+end
+
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    print("Player Death")
+end
+
+entity.Debug.OnUseCrucifix = function()
+print("Custom crucifixion script here")
+end
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
