@@ -11,7 +11,7 @@ local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(
 TW:Play()
 local sound = Instance.new("Sound")
 	sound.SoundId = "rbxassetid://"..6385111188
-	sound.Looped = false
+	sound.Looped = true
 	sound.Parent = workspace
 	sound.Volume = 0.5
 	sound:Play()
@@ -50,6 +50,8 @@ local entity = Spawner.createEntity({
 
 entity.Debug.OnEntitySpawned = function()
     print("Entity has spawned")
+    game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+    game.workspace.sound:Destroy()
 end
 
 entity.Debug.OnEntityDespawned = function()
