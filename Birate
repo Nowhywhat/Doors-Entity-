@@ -1,0 +1,93 @@
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nowhywhat/DOORS-MODE-MAIN/main/SpawnerEntity"))()
+
+---====== Create entity ======---
+
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(30, 3, 94)
+game.Lighting.MainColorCorrection.Contrast = 1
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(2.5), {Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(3),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://"..6385111188
+	sound.Looped = false
+	sound.Parent = workspace
+	sound.Volume = 0.5
+	sound:Play()
+
+local entity = Spawner.createEntity({
+    CustomName = "Bitera",
+    Model = "rbxassetid://16596150898", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 80,
+    MoveDelay = 0,
+    HeightOffset = 4,
+    CanKill = true,
+    KillRange = 10,
+    SpawnInFront = true,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 1
+    },
+    Cycles = {
+        Min = 1.5,
+        Max = 1.5,
+        Delay = 0.1
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = true,
+    BreakCrucifix = true,
+    DeathMessage = {"you die to A-10", "yee."},
+    IsCuriousLight = true
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has spawned")
+end
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0.01 then
+        game.Players.LocalPlayer.Character.Humanoid.Health -= 0.1
+    end
+    local ReSt = game:GetService("ReplicatedStorage") 
+ ReSt.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "birate"
+end
+
+entity.Debug.OnDeath = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/huyhoangphuc/hehhe/main/testbsjwhw"))()
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
