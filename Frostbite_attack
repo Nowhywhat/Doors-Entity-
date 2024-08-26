@@ -1,0 +1,16 @@
+game.workspace.FrostBite.FrostyNew.Part.ParticleEmitter.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.face.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.Heylois.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrail.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.smoke.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrai2l.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrai3l.Enabled = true
+game.workspace.FrostBite.FrostyNew.Ambience:Play()
+game.workspace.FrostBite.FrostyNew.AmbienceFar:Play()
+local ultimaroom = game.ReplicatedStorage.GameData.LatestRoom.Value
+
+while true do
+wait(2)
+game.Players.LocalPlayer.Character.Humanoid.Health -= 5
+if ultimaroom ~= game.ReplicatedStorage.GameData.LatestRoom.Value then break end
+end
