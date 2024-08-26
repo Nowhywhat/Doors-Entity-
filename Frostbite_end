@@ -1,0 +1,48 @@
+game.workspace.FrostBite.FrostyNew.Part.ParticleEmitter.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.smoke.Enabled = true
+function GitAud(soundgit,filename)
+    SoundName=tostring(SoundName)
+    local url=soundgit
+    local FileName = filename
+    writefile(FileName..".mp3", game:HttpGet(url))
+    return (getcustomasset or getsynasset)(FileName..".mp3")
+end
+
+function CustomGitSound(soundlink, vol, filename)
+    local Sp = Instance.new("Sound")
+    Sp.SoundId = GitAud(soundlink, filename)
+    Sp.Parent = workspace
+    Sp.Volume = 0.7
+    Sp:Play()
+end
+
+CustomGitSound("https://github.com/Nowhywhat/Entity-sound/blob/main/FrostBite%20Spawned.mp3", 1, "Spawned)
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+function GitAud(soundgit,filename)
+    SoundName=tostring(SoundName)
+    local url=soundgit
+    local FileName = filename
+    writefile(FileName..".mp3", game:HttpGet(url))
+    return (getcustomasset or getsynasset)(FileName..".mp3")
+end
+
+function CustomGitSound(soundlink, vol, filename)
+    local end = Instance.new("Sound")
+    end.SoundId = GitAud(soundlink, filename)
+    end.Parent = workspace
+    end.Volume = 0.7
+    end:Play()
+end
+
+CustomGitSound("https://github.com/Nowhywhat/Entity-sound/blob/main/km_20240826_1080p_30f_20240826_081401.mp3", 1, "frostend")
+game.workspace.FrostBite.FrostyNew.Part.ParticleEmitter.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.face.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.Heylois.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrail.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.smoke.Enabled = true
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrai2l.Enabled = false
+game.workspace.FrostBite.FrostyNew.Attachment.BlackTrai3l.Enabled = false
+game.workspace.FrostBite.FrostyNew.Ambience:Stop()
+game.workspace.FrostBite.FrostyNew.AmbienceFar:Stop()
+wait(2)
+workspace.FrostBite:Destroy()
