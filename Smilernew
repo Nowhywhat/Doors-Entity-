@@ -16,7 +16,7 @@ local entity = Spawner.createEntity({
     ShatterLights = true,
     FlickerLights = { Enabled = true, Duration = 10 },
     Cycles = { Min = 10, Max = 10, Delay = 0.5 },
-    CamShake = { Enabled = true, Values = {3.5, 20, 0.1, 1}, Range = 100 },
+    CamShake = { Enabled = true, Values = {5.5, 20, 0.1, 1}, Range = 50 },
     ResistCrucifix = true,
     BreakCrucifix = false,
     DeathMessage = {"This death message is not available"},
