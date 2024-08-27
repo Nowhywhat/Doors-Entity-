@@ -9,7 +9,7 @@ TW:Play()
     roast.Parent = workspace
     roast.Name = "roast"
     roast.SoundId = "rbxassetid://9125936117"
-    roast.Volume = 1.6
+    roast.Volume = 5
     roast.Pitch = 3
     roast:Play()
     wait(0.6)
