@@ -11,12 +11,12 @@ local entity = Spawner.createEntity({
     MoveDelay = 5,
     HeightOffset = 1,
     CanKill = true,
-    KillRange = 50,
+    KillRange = 40,
     SpawnInFront = false,
     ShatterLights = true,
     FlickerLights = { Enabled = true, Duration = 5 },
-    Cycles = { Min = 5, Max = 5, Delay = 2 },
-    CamShake = { Enabled = true, Values = {9.5, 20, 0.1, 1}, Range = 100 },
+    Cycles = { Min = 2, Max = 3, Delay = 2 },
+    CamShake = { Enabled = true, Values = {9.5, 20, 0.1, 1}, Range = 50 },
     ResistCrucifix = true,
     BreakCrucifix = false,
     DeathMessage = {"This death message is not available"},
@@ -30,7 +30,7 @@ entity.Debug.OnEntitySpawned = function()
 	ele.Parent = game.Workspace
 	ele.Name = "start2"
 	ele.SoundId = "rbxassetid://157325701"
-	ele.Volume = 2
+	ele.Volume = 10
 	ele.PlaybackSpeed = 0.9
 	ele:Play()
 end
