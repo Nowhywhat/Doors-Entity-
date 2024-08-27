@@ -1,0 +1,159 @@
+---====== Define spawner ======---
+ 
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+ 
+---====== Create entity ======---
+ 
+local entity = Spawner.createEntity({
+    CustomName = "Ripper",
+    Model = "rbxassetid://15989468546",
+    Speed = 185,
+    MoveDelay = 8,
+    HeightOffset = 3,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 5
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1,
+        Delay = 2
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true
+})
+ 
+---====== Debug ======---
+ 
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+    local redtweeninfo = TweenInfo.new(3)
+local redinfo = {Color = Color3.new(100, 0, 0)}
+----------
+for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+			if v:IsA("Light") then
+					game.TweenService:Create(v,redtweeninfo,redinfo):Play()
+					if v.Parent.Name == "LightFixture" then
+						    game.TweenService:Create(v.Parent,redtweeninfo,redinfo):Play()
+					end
+		  end
+end
+local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camara = workspace.CurrentCamera
+local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(Cf)
+	camara.CFrame = camara.CFrame * Cf
+end)
+camShake:Start()
+camShake:Shake(CameraShaker.Presets.Earthquake)
+end
+ 
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawned")
+    workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:WaitForChild("Door").ClientOpen:FireServer()
+    local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camara = game.Workspace.CurrentCamera
+local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+ camara.CFrame = camara.CFrame * shakeCf
+end)
+camShake:Start()
+camShake:ShakeOnce(15,25,0,2,1,6)
+
+    local ripeend = Instance.new("Sound")
+    ripeend.Parent = workspace
+    ripeend.Name = "RipperEnd"
+    ripeend.SoundId = "rbxassetid://1837829565"
+    ripeend.Volume = 3
+    ripeend.Pitch = 1
+    ripeend:Play()
+    wait(3)
+    ---====== Load achievement giver ======---
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+
+---====== Display achievement ======---
+achievementGiver({
+    Title = "Torn Apart",
+    Desc = "Dont leave too early..",
+    Reason = "Encounter Ripper.",
+    Image = "rbxassetid://17702317077"
+})
+end
+ 
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+    function GitAud(soundgit,filename)
+    SoundName=tostring(SoundName)
+    local url=soundgit
+    local FileName = filename
+    writefile(FileName..".mp3", game:HttpGet(url))
+    return (getcustomasset or getsynasset)(FileName..".mp3")
+end
+
+function CustomGitSound(soundlink, vol, filename)
+    local Rpmv = Instance.new("Sound")
+    Rpmv.SoundId = GitAud(soundlink, filename)
+    Rpmv.Parent = workspace
+    Rpmv.Volume = 3
+    Rpmv:Play()
+end
+
+CustomGitSound("https://github.com/Nowhywhat/Entity-sound/blob/main/rippermoving.mp3", 1, "Rpmv")
+end
+ 
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+ 
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+ 
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+ 
+entity.Debug.OnDeath = function()
+    print("Player has died")
+    local func, setupval, getinfo, typeof, getgc, next = nil, debug.setupvalue or setupvalue, debug.getinfo or getinfo, typeof, getgc, next
+ 
+for i,v in next, getgc(false) do
+    if typeof(v) == "function" then
+        local info = getinfo(v)
+        if info.currentline == 54 and info.nups == 2 and info.is_vararg == 0 then
+            func = v
+            break
+        end
+    end
+end
+ 
+local function DeathHint(hints, type: string)
+    setupval(func, 1, hints)
+    if type ~= nil then
+        setupval(func, 2, type)
+    end
+end
+ 
+DeathHint({
+    "You died to Ripper",
+}, "Blue") -- "Blue" or "Yellow"
+end
+ 
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+ 
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+ 
+---====== Run entity ======---
+ 
+Spawner.runEntity(entity)
