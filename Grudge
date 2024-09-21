@@ -46,6 +46,7 @@ entity.Debug.OnEntityDespawned = function()
     wait(3)
     require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("!💀Survive The Grudge💀!",true)
     wait(500)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Yuzixser-Script/Monster_Spawner/refs/heads/main/Grudge"))()
 end
 
 entity.Debug.OnEntityStartMoving = function()
