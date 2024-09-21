@@ -8,7 +8,7 @@ local entity = Spawner.createEntity({
     CustomName = "Red Moving",
     Model = "https://github.com/Yuzixser-Script/Monster_Model/blob/main/redmoving.rbxm?raw=true", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
     Speed = 120,
-    MoveDelay = 2,
+    MoveDelay = 5,
     HeightOffset = 0,
     CanKill = true,
     KillRange = 50,
